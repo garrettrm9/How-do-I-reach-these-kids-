@@ -1,6 +1,26 @@
-body {
+.bodyLanding {
   background-color: #2e4053;
+  background-image: url('images/chalk.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
+
+/*.gameBody {
+  background-image: url('images/classroom.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}*/
+
+/*.gameIntro {
+  top: 250px;
+  left: 285px;
+  position: relative;
+  color: white;
+  text-shadow: 5px 5px black, 5px 5px black, 5px 5px black, 5px 5px black;
+  text-decoration: underline;
+}*/
 
 .title {
   color: white;
@@ -28,7 +48,7 @@ p {
 }
 
 a {
-  font-size: 20px;
+  font-size: 25px;
   text-decoration: none;
-  color: blue;
+  color: black;
 }
