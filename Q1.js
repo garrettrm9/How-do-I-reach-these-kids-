@@ -1,52 +1,50 @@
-console.log('all good');
-
 var questions = {
   question1: {
     question: 'What does 5x5 equal?',
-    answer1: '25',
-    answer2: '57',
-    answer3: '5',
-    answer4: '7',
+    answer1: ['25', true],
+    answer2: ['57'],
+    answer3: ['5'],
+    answer4: ['7'],
   },
 
   question2: {
     question: 'What does 43-38 equal?',
-    answer1: '69',
-    answer2: '6',
-    answer3: '9',
-    answer4: '5',
+    answer1: ['69'],
+    answer2: ['6'],
+    answer3: ['9'],
+    answer4: ['5', true],
   },
 
   question3: {
     question: 'What does 23x4 equal?',
-    answer1: '13',
-    answer2: '92',
-    answer3: '1',
-    answer4: '3',
+    answer1: ['13'],
+    answer2: ['92', true],
+    answer3: ['1'],
+    answer4: ['3'],
   },
 
   question4: {
     question: 'What does 37+97 equal?',
-    answer1: '63',
-    answer2: '6',
-    answer3: '134',
-    answer4: '3',
+    answer1: ['63'],
+    answer2: ['6'],
+    answer3: ['134', true],
+    answer4: ['3'],
   },
 
   question5W: {
     question: 'Do you have faith, winner?',
-    answer1: 'Yes',
-    answer2: 'No',
-    answer3: 'Meh',
-    answer4: 'Eh',
+    answer1: ['Yes'],
+    answer2: ['No'],
+    answer3: ['Meh'],
+    answer4: ['Eh'],
   },
 
   question5L: {
     question: 'Do you have faith, loser?',
-    answer1: 'Eh',
-    answer2: 'Meh',
-    answer3: 'No',
-    answer4: 'Yes',
+    answer1: ['Eh'],
+    answer2: ['Meh'],
+    answer3: ['No'],
+    answer4: ['Yes'],
   },
 };
 
@@ -59,7 +57,7 @@ var $score = $('<div>').attr('id', 'score');
 
 var roundNum = 1;
 var scoreTotal = 0;
-var x = questions.question1;
+var roundCounter = questions.question1;
 
 var roundRender = function() {
   $header.prepend($round);
@@ -77,7 +75,7 @@ var questionRender = function() {
   var $question = $('<div>');
   $container.prepend($question);
   $question.attr('id', 'question');
-  $question.text(x.question);
+  $question.text(roundCounter.question);
 };
 
 var answerRender1 = function() {
@@ -87,7 +85,7 @@ var answerRender1 = function() {
     .attr({ class: 'answer', id: 'answer1' })
     .click(gameLogic.checkAnswer);
   $answerContainer.append($answer1);
-  $answer1.text(x.answer1);
+  $answer1.text(roundCounter.answer1[0]);
 };
 
 var answerRender2 = function() {
@@ -95,7 +93,7 @@ var answerRender2 = function() {
     .attr({ class: 'answer', id: 'answer2' })
     .click(gameLogic.checkAnswer);
   $answerContainer.append($answer2);
-  $answer2.text(x.answer2);
+  $answer2.text(roundCounter.answer2[0]);
 };
 
 var answerRender3 = function() {
@@ -103,7 +101,7 @@ var answerRender3 = function() {
     .attr({ class: 'answer', id: 'answer3' })
     .click(gameLogic.checkAnswer);
   $answerContainer.append($answer3);
-  $answer3.text(x.answer3);
+  $answer3.text(roundCounter.answer3[0]);
 };
 
 var answerRender4 = function() {
@@ -111,21 +109,21 @@ var answerRender4 = function() {
     .attr({ class: 'answer', id: 'answer4' })
     .click(gameLogic.checkAnswer);
   $answerContainer.append($answer4);
-  $answer4.text(x.answer4);
+  $answer4.text(roundCounter.answer4[0]);
 };
 
 var updateRender = function() {
-  $('#question').text(x.question);
-  $('#answer1').text(x.answer1);
-  $('#answer2').text(x.answer2);
-  $('#answer3').text(x.answer3);
-  $('#answer4').text(x.answer4);
+  $('#question').text(roundCounter.question);
+  $('#answer1').text(roundCounter.answer1[0]);
+  $('#answer2').text(roundCounter.answer2[0]);
+  $('#answer3').text(roundCounter.answer3[0]);
+  $('#answer4').text(roundCounter.answer4[0]);
 };
 
 var checkAnswer = function(answer) {
   //check answer, add score if applicaple, advance round
-  //remove event listener
-  if (x.answer1 === answer.target.innerHTML) {
+  //NEEDS CONDITION FOR IF IT'S Q5!!
+  if (answer.target) {
     alert('You win');
     scoreTotal += 10;
     roundNum += 1;
@@ -142,28 +140,29 @@ var checkAnswer = function(answer) {
 
 var nextQuestion = function() {
   if (roundNum === 2) {
-    x = questions.question2;
+    roundCounter = questions.question2;
     renderBoard.updateRender();
   } else if (roundNum === 3) {
-    x = questions.question3;
+    roundCounter = questions.question3;
     renderBoard.updateRender();
   } else if (roundNum === 4) {
-    x = questions.question4;
+    roundCounter = questions.question4;
     renderBoard.updateRender();
   } else if (roundNum === 5 && scoreTotal >= 25) {
-    x = questions.question5W;
+    roundCounter = questions.question5W;
     renderBoard.updateRender();
   } else if (roundNum === 5 && scoreTotal < 25) {
-    x = questions.question5L;
+    roundCounter = questions.question5L;
     renderBoard.updateRender();
   }
 };
-
 // $('.answer').off('click', checkAnswer);
+// remove event listener code for later
 
 var renderBoard = {
   //create divs for question and answers, append to DOM
   //add appropriate styling classes and click events
+  //re-renders text for new questions after user makes selection
   scoreRender: scoreRender,
   roundRender: roundRender,
   questionRender: questionRender,
@@ -175,6 +174,9 @@ var renderBoard = {
 };
 
 var gameLogic = {
+  //checks is answer is correct, adds point if correct, advances round by 1
+  //re-renders score and round ... pulls new text and calls updateTender
+  //from renderBoard obj
   checkAnswer: checkAnswer,
   nextQuestion: nextQuestion,
 };
