@@ -412,10 +412,10 @@ var nextQuestion = function() {
   } else if (roundNum === 4) {
     roundCounter = questions.question4;
     renderBoard.updateRender();
-  } else if (roundNum === 5 && scoreTotal >= 30) {
+  } else if (roundNum === 5 && scoreTotal >= 25) {
     roundCounter = questions.question5W;
     renderBoard.updateRender();
-  } else if (roundNum === 5 && scoreTotal < 30) {
+  } else if (roundNum === 5 && scoreTotal < 25) {
     roundCounter = questions.question5L;
     renderBoard.updateRender();
   }
