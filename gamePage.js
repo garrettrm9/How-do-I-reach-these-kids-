@@ -31,7 +31,7 @@ var questions = {
     answer1:
       'A. Answer the question quickly, and ignore their inevitable follow-up queries.',
     answer2:
-      'B. Break it down for them piece-by-piece - and answer their follow-up questions with care and respect.',
+      'B. Break it down for them piece-by-piece, and answer their follow-up questions with care and respect.',
     answer3:
       'C. Tell the students to ask the T.A. after class. You got bigger problems to deal with.',
     answer4:
@@ -65,7 +65,7 @@ var questions = {
     answer1: "A. No, I agree - they're a bunch of lousy good-for-nothin's.",
     answer2: "B. It's not their fault, the failure is mine.",
     answer3:
-      "C. It isn't that they have no hope, so much as it's they have NO HOPE.",
+      "C. It isn't that they have no hope, so much as they have NO HOPE.",
     answer4: "D. Wait, I'm still working that job?",
   },
 };
@@ -268,7 +268,7 @@ var checkAnswer = function(event) {
     event.target.innerHTML === roundCounter.answer3
   ) {
     $footer.text(
-      "Good thing your T.A. is so dependable. But I hope you won't take credit when the students graduate. 5 points"
+      "Good thing your T.A. is so dependable. But I hope you won't take credit when the students achieve fame and fortune. 5 points"
     );
     scoreTotal += 5;
     roundNum += 1;
